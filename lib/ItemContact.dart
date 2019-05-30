@@ -54,7 +54,8 @@ class ItemContact extends StatelessWidget{
             offset: Offset(0.0,7.0)
           )
         ],
-        borderRadius: BorderRadius.circular(10.0)
+        borderRadius: BorderRadius.circular(10.0),
+
       ),
     );
 

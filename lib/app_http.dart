@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'Contact.dart';
-import 'dart:io';
+import 'detail_contact.dart';
 
 import 'ItemContact.dart';
 
 class AppHttp extends StatefulWidget{
   _MyApp createState() => new _MyApp();
-  AppHttp();
 }
 
 
@@ -32,6 +31,7 @@ class _MyApp extends State<AppHttp>{
       list = (json.decode(response.body) as List)
               .map((data)=>new Contact.fromJson(data))
               .toList();
+
     }else{
       print("error");
       throw Exception();
@@ -47,9 +47,14 @@ class _MyApp extends State<AppHttp>{
     return ListView.builder(
         itemCount: values==null? 0: values.length,
         itemBuilder: (BuildContext context, int index){
-          return ItemContact(values[index]);
+          return GestureDetector(
+              onTap: (){
+                print("Nombre  ${values[index].nombre}");
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailContact(values[index])));
+              },
 
-
+              child: ItemContact(values[index]),
+            );
         }
     );
   }
